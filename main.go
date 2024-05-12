@@ -1,23 +1,13 @@
 package main
 
 import (
+	"expense-service/routes"
+
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	router := gin.Default()
-
-	router.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-
-	router.GET("/pong", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "honch",
-		})
-	})
-
+	routes.InitRoutes(router)
 	router.Run(":9000")
 }
