@@ -13,5 +13,11 @@ func main() {
 		})
 	})
 
+	router.GET("/pong", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "honch",
+		})
+	})
+
 	router.Run(":9000")
 }
