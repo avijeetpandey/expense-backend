@@ -7,7 +7,6 @@ package db
 
 import (
 	"context"
-	"database/sql"
 )
 
 const createExpense = `-- name: CreateExpense :one
@@ -22,10 +21,10 @@ INSERT into expenses (
 `
 
 type CreateExpenseParams struct {
-	Name     string         `json:"name"`
-	Balance  int64          `json:"balance"`
-	Currency string         `json:"currency"`
-	Tag      sql.NullString `json:"tag"`
+	Name     string `json:"name"`
+	Balance  int64  `json:"balance"`
+	Currency string `json:"currency"`
+	Tag      string `json:"tag"`
 }
 
 func (q *Queries) CreateExpense(ctx context.Context, arg CreateExpenseParams) (Expense, error) {
