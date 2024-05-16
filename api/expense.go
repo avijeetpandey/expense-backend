@@ -40,6 +40,31 @@ func (server *Server) addExpense(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, expense)
 }
 
+type DeleteExpenseRequest struct {
+	ID int64 `uri:"id" binding:"required,min=1"`
+}
+
+// Delete Expense
+func (server *Server) deleteExpense(ctx *gin.Context) {
+	var req DeleteExpenseRequest
+
+	if err := ctx.ShouldBindUri(&req); err != nil {
+		ctx.JSON(http.StatusBadGateway, errorResponse(err))
+		return
+	}
+
+	err := server.store.DeleteExpense(ctx, req.ID)
+
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"message": "Succesfully deleted",
+	})
+}
+
 // health endpoint
 func (server *Server) healthCheck(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{

@@ -16,6 +16,7 @@ func NewServer(store *db.Store) *Server {
 
 	// CRUD Expense
 	router.POST("/add/expense", server.addExpense)
+	router.DELETE("/delete/:id", server.deleteExpense)
 
 	// HEALTHCHECK
 	router.GET("/health", server.healthCheck)
