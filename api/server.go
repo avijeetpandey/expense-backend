@@ -19,6 +19,11 @@ func NewServer(store *db.Store) *Server {
 	router.DELETE("/expense/:id", server.deleteExpense)
 	router.GET("/expense/:id", server.getExpense)
 
+	// CRUD Profile
+	router.POST("/profile", server.createProfile)
+	router.GET("/profile/:id", server.getProfile)
+	router.DELETE("/profile/:id", server.deleteProfile)
+
 	// HEALTHCHECK
 	router.GET("/health", server.healthCheck)
 
