@@ -14,6 +14,12 @@ func NewServer(store *db.Store) *Server {
 	server := &Server{store: store}
 	router := gin.Default()
 
+	// CRUD Expense
+	router.POST("/expense", server.addExpense)
+	router.DELETE("/expense/:id", server.deleteExpense)
+	router.GET("/expense/:id", server.getExpense)
+
+	// HEALTHCHECK
 	router.GET("/health", server.healthCheck)
 
 	server.router = router
